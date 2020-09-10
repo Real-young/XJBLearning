@@ -1,6 +1,8 @@
 #############################################
 # Maven.gitignore global
 #############################################
+#
+out/
 target/
 pom.xml.tag
 pom.xml.releaseBackup
