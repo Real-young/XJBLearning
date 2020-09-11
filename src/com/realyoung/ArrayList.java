@@ -1,5 +1,7 @@
 package com.realyoung;
 
+import java.util.Arrays;
+
 public class ArrayList {
     // 数组长度
     private int size;
@@ -37,7 +39,7 @@ public class ArrayList {
 
     // set
     public int set(int index, int element) {
-        if (index < 0 || index >= 0) {
+        if (index < 0 || index >= size) {
             throw new IndexOutOfBoundsException("Index"+ index + ", Size" + size);
         }
         // 取出旧的
@@ -56,6 +58,50 @@ public class ArrayList {
             }
         }
         return ELEMENT_NOT_FOUND;
+    }
+
+    // 清除所有的元素
+    public void clear() {
+        size = 0;
+    }
+
+    // 默认添加到最后
+    public void add(int element) {
+//        this.add(size,element);
+        elements[size++] = element;
+    }
+
+    // 往一个位置添加一个元素
+    public void add(int index, int element) {
+
+    }
+
+    // 删除某个位置的元素
+    public int remove(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index"+ index + ", Size" + size);
+        }
+        int old = elements[index];
+        // 遍历删除的元素的后一位到末位
+        for (int i = index + 1; i < size - 1; i++) {
+            // 当前的 放到 前一位
+            elements[i-1] = elements[i];
+        }
+        size --;
+        return old;
+    }
+
+
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder();
+        string.append("size = ").append(size).append(", [");
+        for(int i = 0; i < size; i++) {
+            if (i!=0) string.append(", ");
+            string.append(elements[i]);
+        }
+        string.append("]");
+        return string.toString();
     }
 
 
