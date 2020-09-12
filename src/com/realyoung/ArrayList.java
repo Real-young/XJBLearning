@@ -30,18 +30,13 @@ public class ArrayList {
 
     // 获取 index 的元素
     public int get(int index) {
-        if (index < 0 || index >= size) {
-            // 抛出异常
-            throw new IndexOutOfBoundsException("Index"+index + ", Size" + size);
-        }
+        rangeCheck(index);
         return elements[index];
     }
 
     // set
     public int set(int index, int element) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index"+ index + ", Size" + size);
-        }
+        rangeCheck(index);
         // 取出旧的
         int old = elements[index];
         // 设置新的元素
@@ -67,20 +62,27 @@ public class ArrayList {
 
     // 默认添加到最后
     public void add(int element) {
-//        this.add(size,element);
-        elements[size++] = element;
+        add(size, element);
+//        elements[size++] = element;
     }
 
     // 往一个位置添加一个元素
     public void add(int index, int element) {
+        rangeCheckForAdd(index);
+
+        for(int i = size-1; i >= index; i--) {
+            elements[i+1] = elements[i];
+        }
+        elements[index] = element;
+        size ++ ;
 
     }
 
     // 删除某个位置的元素
     public int remove(int index) {
-        if (index < 0 || index >= size) {
-            throw new IndexOutOfBoundsException("Index"+ index + ", Size" + size);
-        }
+
+        rangeCheck(index);
+
         int old = elements[index];
         // 遍历删除的元素的后一位到末位
         for (int i = index + 1; i < size - 1; i++) {
@@ -102,6 +104,22 @@ public class ArrayList {
         }
         string.append("]");
         return string.toString();
+    }
+
+    private void outOfBounds(int index) {
+        throw new IndexOutOfBoundsException("Index"+ index + ", Size" + size);
+    }
+
+    private void rangeCheck(int index) {
+        if (index < 0 || index >= size) {
+            outOfBounds(index);
+        }
+    }
+
+    private void rangeCheckForAdd(int index) {
+        if (index < 0 || index > size) {
+            outOfBounds(index);
+        }
     }
 
 
