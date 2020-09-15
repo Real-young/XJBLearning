@@ -2,12 +2,12 @@ package com.realyoung;
 
 import java.util.Arrays;
 
-public class ArrayList {
+public class ArrayList<E>{
     // 数组长度
     private int size;
 
     // 所有的元素
-    private int[] elements;
+    private E[] elements;
 
     // 默认长度 10
     private static final int DEFAULT_CAPACITY = 10;
@@ -16,7 +16,7 @@ public class ArrayList {
     public ArrayList(int capacity) {
         // 比默认小取默认  否则 取传参
         capacity = (capacity < DEFAULT_CAPACITY)? DEFAULT_CAPACITY : capacity;
-        elements = new int[capacity];
+        elements = (E[]) new Object[capacity];
     }
 
     public ArrayList() {
@@ -29,16 +29,16 @@ public class ArrayList {
     }
 
     // 获取 index 的元素
-    public int get(int index) {
+    public E get(int index) {
         rangeCheck(index);
         return elements[index];
     }
 
     // set
-    public int set(int index, int element) {
+    public E set(int index, E element) {
         rangeCheck(index);
         // 取出旧的
-        int old = elements[index];
+        E old = elements[index];
         // 设置新的元素
         elements[index] = element;
         // 把旧元素返回出去
@@ -46,7 +46,7 @@ public class ArrayList {
     }
 
     // 查看元素的索引
-    public int indexOf(int element) {
+    public int indexOf(E element) {
         for (int i = 0; i < size; i++) {
             if (elements[i] == element) {
                 return i;
@@ -61,14 +61,16 @@ public class ArrayList {
     }
 
     // 默认添加到最后
-    public void add(int element) {
+    public void add(E element) {
         add(size, element);
 //        elements[size++] = element;
     }
 
     // 往一个位置添加一个元素
-    public void add(int index, int element) {
-        rangeCheckForAdd(index);
+    public void add(int index, E element) {
+//        rangeCheckForAdd(index);
+        // 调用扩容
+        ensureCapacity(size + 1);
 
         for(int i = size-1; i >= index; i--) {
             elements[i+1] = elements[i];
@@ -79,11 +81,11 @@ public class ArrayList {
     }
 
     // 删除某个位置的元素
-    public int remove(int index) {
+    public E remove(int index) {
 
         rangeCheck(index);
 
-        int old = elements[index];
+        E old = elements[index];
         // 遍历删除的元素的后一位到末位
         for (int i = index + 1; i < size - 1; i++) {
             // 当前的 放到 前一位
@@ -94,6 +96,7 @@ public class ArrayList {
     }
 
 
+    // 重写 toString 方法
     @Override
     public String toString() {
         StringBuilder string = new StringBuilder();
@@ -104,6 +107,24 @@ public class ArrayList {
         }
         string.append("]");
         return string.toString();
+    }
+
+    // 扩容 保证容量足够
+    private void ensureCapacity(int capacity) {
+        int oldCapacity = elements.length;
+        if (oldCapacity >= capacity) return;
+        // 扩容 1.5 倍
+        int newCapacity = oldCapacity + (oldCapacity >> 1);
+        E[] newElements = (E[]) new Object[newCapacity];
+
+        for (int i = 0; i < size; i++) {
+            newElements[i] = elements[i];
+        }
+        // 内存重新指向
+        elements = newElements;
+
+
+        System.out.println("扩容前" + oldCapacity + "扩容后" + newCapacity);
     }
 
     private void outOfBounds(int index) {

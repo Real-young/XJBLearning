@@ -4,17 +4,20 @@ public class Main {
 
     public static void main(String[] args) {
 	// write your code here
-        ArrayList list = new ArrayList();
+        ArrayList<Person> list = new ArrayList();
 //        list.get(0);
-        list.add(123);
-        list.add(1232);
-        list.add(22);
-        list.add(88);
-        list.add(777);
-        list.add(5567);
+        Person person1 = new Person(10,"hello");
+        list.add(person1);
+
+        Person person2 = new Person(12,"hello1");
+        list.add(person2);
+
+        Person person3 = new Person(18,"hello2");
+        list.add(person3);
+
         System.out.println(list.toString());
 
-        list.remove(3);
-        System.out.println(list.toString());
+//        list.remove(3);
+//        System.out.println(list.toString());
     }
 }
