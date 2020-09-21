@@ -47,9 +47,16 @@ public class ArrayList<E>{
 
     // 查看元素的索引
     public int indexOf(E element) {
-        for (int i = 0; i < size; i++) {
-            if (elements[i] == element) {
-                return i;
+        // 空值处理
+        if (element == null) {
+            for (int i = 0; i < size; i++) {
+                if (elements[i] == null) return i;
+            }
+        } else {
+            for (int i = 0; i < size; i++) {
+                if (element.equals(elements[i])) {
+                    return i;
+                }
             }
         }
         return ELEMENT_NOT_FOUND;
@@ -71,7 +78,7 @@ public class ArrayList<E>{
 
     // 往一个位置添加一个元素
     public void add(int index, E element) {
-//        rangeCheckForAdd(index);
+        //rangeCheckForAdd(index);
         // 调用扩容
         ensureCapacity(size + 1);
 
