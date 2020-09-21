@@ -1,8 +1,8 @@
 package com.realyoung;
 
 import java.util.Arrays;
-
-public class ArrayList<E>{
+@SuppressWarnings("unchecked")
+public class ArrayList<E> extends AbstractList<E>{
     // 数组长度
     private int size;
 
@@ -11,7 +11,7 @@ public class ArrayList<E>{
 
     // 默认长度 10
     private static final int DEFAULT_CAPACITY = 10;
-    private static final int ELEMENT_NOT_FOUND = -1;
+
 
     public ArrayList(int capacity) {
         // 比默认小取默认  否则 取传参
@@ -23,10 +23,6 @@ public class ArrayList<E>{
         this(DEFAULT_CAPACITY);
     }
 
-    // 判断是否为空
-    public boolean isEmpty() {
-        return size == 0;
-    }
 
     // 获取 index 的元素
     public E get(int index) {
@@ -70,10 +66,9 @@ public class ArrayList<E>{
         size = 0;
     }
 
-    // 默认添加到最后
-    public void add(E element) {
-        add(size, element);
-//        elements[size++] = element;
+    @Override
+    public int size() {
+        return 0;
     }
 
     // 往一个位置添加一个元素
@@ -137,22 +132,5 @@ public class ArrayList<E>{
 
         System.out.println("扩容前" + oldCapacity + "扩容后" + newCapacity);
     }
-
-    private void outOfBounds(int index) {
-        throw new IndexOutOfBoundsException("Index"+ index + ", Size" + size);
-    }
-
-    private void rangeCheck(int index) {
-        if (index < 0 || index >= size) {
-            outOfBounds(index);
-        }
-    }
-
-    private void rangeCheckForAdd(int index) {
-        if (index < 0 || index > size) {
-            outOfBounds(index);
-        }
-    }
-
 
 }
