@@ -57,6 +57,9 @@ public class ArrayList<E>{
 
     // 清除所有的元素
     public void clear() {
+        for (int i = 0; i < size; i++) {
+            elements[i] = null;
+        }
         size = 0;
     }
 
@@ -85,14 +88,15 @@ public class ArrayList<E>{
 
         rangeCheck(index);
 
-        E old = elements[index];
+        E oldElement = elements[index];
         // 遍历删除的元素的后一位到末位
         for (int i = index + 1; i < size - 1; i++) {
             // 当前的 放到 前一位
-            elements[i-1] = elements[i];
+            elements[i - 1] = elements[i];
         }
-        size --;
-        return old;
+        // size 先减去一位
+        elements[--size] = null;
+        return oldElement;
     }
 
 

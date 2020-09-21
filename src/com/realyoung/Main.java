@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args) {
 	// write your code here
-        ArrayList<Person> list = new ArrayList();
+        ArrayList<Person> list = new ArrayList<>();
 //        list.get(0);
         Person person1 = new Person(10,"hello");
         list.add(person1);
@@ -17,7 +17,13 @@ public class Main {
 
         System.out.println(list.toString());
 
-//        list.remove(3);
+        list.clear();
+        System.gc();
 //        System.out.println(list.toString());
+    }
+
+
+    static void test() {
+
     }
 }
