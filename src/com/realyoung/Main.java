@@ -4,24 +4,24 @@ public class Main {
 
     public static void main(String[] args) {
 	    // write your code here
-        List<Integer> list = new LinkedList<>();
-
-        list.add(20);
-        list.add(30);
-        list.add(0,40);
-
-        // 40 20 30
-        System.out.println(list.toString());
-
-        list.add(list.size(),80);
-
-        // 40 20 30 80
-        System.out.println(list.toString());
-
-        list.remove(1);
-
-        // 40 30 80
-        System.out.println(list.toString());
+//        List<Integer> list = new LinkedList<>();
+//
+//        list.add(20);
+//        list.add(30);
+//        list.add(0,40);
+//
+//        // 40 20 30
+//        System.out.println(list.toString());
+//
+//        list.add(list.size(),80);
+//
+//        // 40 20 30 80
+//        System.out.println(list.toString());
+//
+//        list.remove(1);
+//
+//        // 40 30 80
+//        System.out.println(list.toString());
 
 
     }
