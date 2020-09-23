@@ -66,11 +66,6 @@ public class ArrayList<E> extends AbstractList<E>{
         size = 0;
     }
 
-    @Override
-    public int size() {
-        return 0;
-    }
-
     // 往一个位置添加一个元素
     public void add(int index, E element) {
         //rangeCheckForAdd(index);
