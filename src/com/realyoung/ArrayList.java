@@ -96,6 +96,21 @@ public class ArrayList<E> extends AbstractList<E>{
         return oldElement;
     }
 
+    // 缩容
+    private void trim() {
+        int capacity = elements.length;
+        if (size >= (capacity) || capacity <= DEFAULT_CAPACITY) return;
+
+        int newCapacity = capacity >> 1;
+        E[] newElements = (E[]) new Object[newCapacity];
+        for (int i = 0; i < size; i++) {
+            newElements[i] = elements[i];
+        }
+
+        elements = newElements;
+
+    }
+
 
     // 重写 toString 方法
     @Override
