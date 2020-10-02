@@ -42,11 +42,12 @@ public class SingleCircleLinkedList<E> extends AbstractList<E>{
     public void add(int index, E element) {
         rangeCheckForAdd(index);
         if (index == 0) {
-            firstNode = new Node<E>(element, firstNode);
+            Node<E> newFirst = new Node<E>(element, firstNode);
 
             // 取出最后一个节点指向第一个节点
-            Node<E> last = (size == 0) ? firstNode : node(size - 1);
-            last.nextNode = firstNode;
+            Node<E> last = (size == 0) ? newFirst : node(size - 1);
+            last.nextNode = newFirst;
+            firstNode = newFirst;
 
         } else {
             Node<E> prev = node(index - 1);
