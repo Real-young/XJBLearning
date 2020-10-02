@@ -60,6 +60,7 @@ public class LinkedList<E> extends AbstractList<E> {
         } else {
             // 拿到前面的节点
             Node<E> prev = node(index - 1);
+            node = prev.nextNode;
             prev.nextNode = prev.nextNode.nextNode;
         }
         size --;
