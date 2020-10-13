@@ -108,4 +108,18 @@ public class SingleCircleLinkedList<E> extends AbstractList<E>{
         return node;
 
     }
+
+    @Override
+    public String toString() {
+        StringBuilder string = new StringBuilder();
+        string.append("size = ").append(size).append(", [");
+        Node<E> node = firstNode;
+        for(int i = 0; i < size; i++) {
+            if (i!=0) string.append(", ");
+            string.append(node.element);
+            node = node.nextNode;
+        }
+        string.append("]");
+        return string.toString();
+    }
 }

@@ -5,7 +5,13 @@ public class Main {
     public static void main(String[] args) {
 	    // write your code here
 //         testList(new CircleLinkedList<>());
-        josephus();
+
+//        testList(new SingleCircleLinkedList<>());
+//        testList(new LinkedList<>());
+        testList(new LinkedList2<>());
+
+//        josephus();
+
 
 
     }
