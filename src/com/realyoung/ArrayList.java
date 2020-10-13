@@ -4,7 +4,7 @@ import java.util.Arrays;
 @SuppressWarnings("unchecked")
 public class ArrayList<E> extends AbstractList<E>{
     // 数组长度
-    private int size;
+//    private int size;
 
     // 所有的元素
     private E[] elements;
