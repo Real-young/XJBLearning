@@ -5,6 +5,10 @@ public class CircleLinkedList<E> extends AbstractList<E> {
     private Node firstNode;
     private Node lastNode;
 
+    // 约瑟夫问题
+    private Node currentNode;
+
+
     public class Node<E> {
         E element;
         Node<E> nextNode;
@@ -13,6 +17,27 @@ public class CircleLinkedList<E> extends AbstractList<E> {
             this.element = element;
             this.nextNode = nextNode;
             this.prevNode = prevNode;
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+
+            if (prevNode != null) {
+                sb.append(prevNode.element);
+            } else {
+                sb.append("null");
+            }
+
+            sb.append("_").append(element).append("_");
+
+            if (nextNode != null) {
+                sb.append(nextNode.element);
+            } else {
+                sb.append("null");
+            }
+
+            return sb.toString();
         }
     }
 
@@ -37,24 +62,26 @@ public class CircleLinkedList<E> extends AbstractList<E> {
 
     @Override
     public void add(int index, E element) {
+        rangeCheckForAdd(index);
         if (index == size) {
             // 取出最后一个  然后替换
             Node<E> oldLast = lastNode;
             // 新插入一个节点  new 一个
-            Node<E> node = new Node<>(element, firstNode, oldLast);
+            lastNode = new Node<>(element, firstNode, oldLast);
             if (oldLast == null) {
                 firstNode = lastNode;
                 firstNode.prevNode = firstNode;
                 firstNode.nextNode = firstNode;
             } else {
-                oldLast.nextNode = node;
-                firstNode.prevNode = node;
+                oldLast.nextNode = lastNode;
+                firstNode.prevNode = lastNode;
             }
         } else  {
             Node<E> nextNode = node(index);
+            Node<E> prev = nextNode.prevNode;
             Node<E> node = new Node<>(element,nextNode,nextNode.prevNode);
             nextNode.prevNode = node;
-            nextNode.prevNode.nextNode = node;
+            prev.nextNode = node;
 
             if (nextNode == firstNode) { // index = 0 的时候
                 firstNode = node;
@@ -65,24 +92,55 @@ public class CircleLinkedList<E> extends AbstractList<E> {
         size ++;
     }
 
+//    @Override
+//    public E remove(int index) {
+//
+//        Node<E> node = firstNode;
+//        if (size == 1) {
+//            firstNode = null;
+//            lastNode = null;
+//        } else {
+//            node = node(index);
+//            Node<E> next = node.nextNode;
+//            Node<E> prev = node.prevNode;
+//
+//            prev.nextNode = next;
+//            next.prevNode = prev;
+//            if (node == firstNode) {
+//                firstNode = next;
+//            }
+//
+//            if (node == lastNode) {
+//                lastNode = prev;
+//            }
+//        }
+//        size --;
+//
+//        return node.element;
+//    }
+
+
     @Override
     public E remove(int index) {
 
-        Node<E> node = firstNode;
+        rangeCheck(index);
+        return remove(node(index));
+    }
+
+    private E remove(Node<E> node) {
         if (size == 1) {
             firstNode = null;
             lastNode = null;
         } else {
-            node = node(index);
-            Node<E> next = node.nextNode;
-            Node<E> prev = node.prevNode;
 
+            Node<E> prev = node.prevNode;
+            Node<E> next = node.nextNode;
             prev.nextNode = next;
             next.prevNode = prev;
+
             if (node == firstNode) {
                 firstNode = next;
             }
-
             if (node == lastNode) {
                 lastNode = prev;
             }
@@ -141,4 +199,28 @@ public class CircleLinkedList<E> extends AbstractList<E> {
         string.append("]");
         return string.toString();
     }
+
+    public void reset() {
+        currentNode = firstNode;
+    }
+
+    public E next() {
+        if (currentNode == null) return null;
+        currentNode = currentNode.nextNode;
+        return (E) currentNode.element;
+    }
+
+    public E remove() {
+        if (currentNode == null) return null;
+        Node<E> next = currentNode.nextNode;
+        E element = (E) remove(currentNode);
+        if (size == 0) {
+            currentNode = null;
+        } else {
+            currentNode = next;
+        }
+        return element;
+    }
+
+
 }
