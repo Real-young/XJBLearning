@@ -8,12 +8,20 @@ public class Main {
 
 //        testList(new SingleCircleLinkedList<>());
 //        testList(new LinkedList<>());
-        testList(new LinkedList2<>());
+//        testList(new LinkedList2<>());
 
 //        josephus();
 
+        Queue<Integer> queue = new Queue<>();
 
+        queue.enQueue(11);
+        queue.enQueue(22);
+        queue.enQueue(33);
+        queue.enQueue(44);
 
+        while (!queue.isEmpty()) {
+            System.out.println(queue.deQueue());
+        }
     }
 
 
