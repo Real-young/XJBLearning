@@ -1,5 +1,5 @@
 package com.realyoung;
-
+// 双向循环链表
 public class CircleLinkedList<E> extends AbstractList<E> {
 
     private Node firstNode;

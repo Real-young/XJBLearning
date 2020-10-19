@@ -1,5 +1,5 @@
 package com.realyoung;
-
+// 动态数组
 import java.util.Arrays;
 @SuppressWarnings("unchecked")
 public class ArrayList<E> extends AbstractList<E>{

@@ -1,5 +1,5 @@
 package com.realyoung;
-
+// 单向链表
 public class LinkedList<E> extends AbstractList<E> {
 //    private int size;
     private Node firstNode;
