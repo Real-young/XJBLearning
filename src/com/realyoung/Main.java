@@ -12,15 +12,26 @@ public class Main {
 
 //        josephus();
 
-        Queue<Integer> queue = new Queue<>();
+//        Queue<Integer> queue = new Queue<>();
+//
+//        queue.enQueue(11);
+//        queue.enQueue(22);
+//        queue.enQueue(33);
+//        queue.enQueue(44);
+//
+//        while (!queue.isEmpty()) {
+//            System.out.println(queue.deQueue());
+//        }
 
-        queue.enQueue(11);
-        queue.enQueue(22);
-        queue.enQueue(33);
-        queue.enQueue(44);
+        Deque<Integer> queue = new Deque<>();
+
+        queue.enQueueFront(11);
+        queue.enQueueFront(22);
+        queue.enQueueRear(33);
+        queue.enQueueRear(44);
 
         while (!queue.isEmpty()) {
-            System.out.println(queue.deQueue());
+            System.out.println(queue.deQueueRear());
         }
     }
 

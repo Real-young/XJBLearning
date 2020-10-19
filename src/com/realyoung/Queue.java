@@ -4,7 +4,7 @@ public class Queue<E>{
     LinkedList2<E> list = new LinkedList2<E>();
 
     public int size () {
-        return list.size;
+        return list.size();
     }
 
     public boolean isEmpty() {
