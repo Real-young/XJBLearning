@@ -23,16 +23,18 @@ public class Main {
 //            System.out.println(queue.deQueue());
 //        }
 
-        Deque<Integer> queue = new Deque<>();
+//        Deque<Integer> queue = new Deque<>();
+//
+//        queue.enQueueFront(11);
+//        queue.enQueueFront(22);
+//        queue.enQueueRear(33);
+//        queue.enQueueRear(44);
+//
+//        while (!queue.isEmpty()) {
+//            System.out.println(queue.deQueueRear());
+//        }
 
-        queue.enQueueFront(11);
-        queue.enQueueFront(22);
-        queue.enQueueRear(33);
-        queue.enQueueRear(44);
-
-        while (!queue.isEmpty()) {
-            System.out.println(queue.deQueueRear());
-        }
+        testCircleQueue();
     }
 
 
@@ -75,5 +77,25 @@ public class Main {
         Asserts.test(list.get(list.size() - 1) == 44);
 
         System.out.println(list);
+    }
+
+    static void testCircleQueue() {
+        CircleQueue<Integer> queue = new CircleQueue<Integer>();
+
+        for (int i = 0; i < 10; i++) {
+            queue.enQueue(i);
+        }
+        System.out.println(queue);
+        for (int i = 0; i < 5; i++){
+            queue.deQueue();
+        }
+        System.out.println(queue);
+        for (int i = 15; i < 23; i++){
+            queue.enQueue(i);
+        }
+        System.out.println(queue);
+        while (!queue.isEmpty()) {
+            System.out.println(queue.deQueue());
+        }
     }
 }
