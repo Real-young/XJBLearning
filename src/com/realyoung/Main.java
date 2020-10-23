@@ -1,4 +1,5 @@
 package com.realyoung;
+import booming.leetcode.leetcode_856;
 
 public class Main {
 
@@ -36,8 +37,11 @@ public class Main {
 
 //        testCircleQueue();
 
-        testCircleDeque();
+//        testCircleDeque();
+        leetcode_856 leetcode = new leetcode_856();
+        System.out.println(leetcode.scoreOfParentheses("(())(())"));
     }
+
 
 
 
