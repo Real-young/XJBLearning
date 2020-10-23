@@ -11,6 +11,10 @@ public class Queue<E>{
         return list.isEmpty();
     }
 
+    public void clear() {
+        list.clear();
+    }
+
     // 入队
     public void enQueue(E element) {
         list.add(element);

@@ -10,6 +10,10 @@ public class Deque<E> {
         return linked.size();
     }
 
+    public void clear() {
+        linked.clear();
+    }
+
     public boolean isEmpty() {
         return linked.isEmpty();
     }

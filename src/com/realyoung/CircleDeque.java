@@ -21,13 +21,21 @@ public class CircleDeque<E> {
         return size == 0;
     }
 
+    public void clear() {
+        for (int i = 0; i < size; i ++) {
+            elements[index(i)] = null;
+        }
+        size = 0;
+        front = 0;
+    }
+
     // 取出真实位置
     private int index(int index) {
         index += front;
         if (index < 0) {
             return elements.length + index;
         }
-        return index % elements.length;
+        return index - (index >= elements.length ? elements.length : 0);
     }
 
     private void ensureCapacity(int capacity) {
@@ -65,7 +73,7 @@ public class CircleDeque<E> {
 
     // 队尾出队
     E deQueueRear() {
-        int indexRear = index(size -1)
+        int indexRear = index(size -1);
         E rearElement = elements[indexRear];
         elements[indexRear] = null;
         size --;
@@ -89,6 +97,20 @@ public class CircleDeque<E> {
     // 获取队头
     E front() {
         return elements[front];
+    }
+
+    @Override
+    public String toString() {
+        StringBuffer string = new StringBuffer();
+        string.append("capacity=").append(elements.length).append(" size=").append(size).append(" front=").append(front).append(", [");
+        for (int i = 0; i < elements.length; i++) {
+            if (i != 0) {
+                string.append(", ");
+            }
+            string.append(elements[i]);
+        }
+        string.append("]");
+        return string.toString();
     }
 
 }
