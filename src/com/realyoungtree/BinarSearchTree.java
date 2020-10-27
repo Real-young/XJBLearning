@@ -2,10 +2,14 @@ package com.realyoungtree;
 
 // 二叉搜索树
 
+import java.util.Comparator;
+
 public class BinarSearchTree<E> {
 
     private int size;
     private Node<E> root;
+    // 比较器
+    private Comparator<E> comparator;
 
     public int size() {
         return size;
@@ -77,8 +81,24 @@ public class BinarSearchTree<E> {
         }
     }
 
+
+    /*
+    *  @return 返回值等于0，代表 e1 e2 相等
+    *               大于0， e1 > e2
+    *               小于0， e1 < e2
+    * */
     private int compare(E e1, E e2) {
-        return 0;
+
+        // 用比较器做比较 可选择对象的值等
+        if (comparator != null) {
+            return comparator.compare(e1, e2);
+        }
+        /*
+        * 强转
+        * 如果没有比较器 则遵循接口
+        * 强制对象实现 compareTo
+        * */
+        return ((Comparable<E>) e1).compareTo(e2);
     }
 
 }
