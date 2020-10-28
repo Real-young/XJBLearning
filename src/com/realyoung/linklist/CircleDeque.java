@@ -1,4 +1,4 @@
-package com.realyoung;
+package com.realyoung.linklist;
 
 // 循环双端队列
 

@@ -1,4 +1,4 @@
-package com.realyoung;
+package com.realyoung.linklist;
 
 public class Queue<E>{
     LinkedList2<E> list = new LinkedList2<E>();

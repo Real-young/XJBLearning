@@ -1,4 +1,4 @@
-package com.realyoung;
+package com.realyoung.linklist;
 import booming.leetcode.leetcode_856;
 
 public class Main {

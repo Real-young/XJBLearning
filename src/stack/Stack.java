@@ -1,6 +1,6 @@
 package stack;
 
-import com.realyoung.ArrayList;
+import com.realyoung.linklist.ArrayList;
 
 public class Stack<E> {
 

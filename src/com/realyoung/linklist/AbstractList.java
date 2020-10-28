@@ -1,4 +1,4 @@
-package com.realyoung;
+package com.realyoung.linklist;
 
 public abstract class AbstractList<E> implements List<E> {
 

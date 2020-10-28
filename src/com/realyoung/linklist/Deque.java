@@ -1,4 +1,4 @@
-package com.realyoung;
+package com.realyoung.linklist;
 
 // 双端队列   double ended queue
 

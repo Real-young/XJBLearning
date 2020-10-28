@@ -1,4 +1,4 @@
-package com.realyoung;
+package com.realyoung.linklist;
 // 双向循环链表
 public class CircleLinkedList<E> extends AbstractList<E> {
 

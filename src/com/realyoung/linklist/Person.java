@@ -1,6 +1,4 @@
-package com.realyoung;
-
-import java.util.Objects;
+package com.realyoung.linklist;
 
 public class Person {
 

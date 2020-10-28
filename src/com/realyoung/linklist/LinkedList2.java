@@ -1,4 +1,4 @@
-package com.realyoung;
+package com.realyoung.linklist;
 // 双向链表
 public class LinkedList2<E> extends AbstractList<E> {
 //    private int size;

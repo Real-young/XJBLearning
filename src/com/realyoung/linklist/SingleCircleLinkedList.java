@@ -1,27 +1,24 @@
-package com.realyoung;
-// 单向链表
-public class LinkedList<E> extends AbstractList<E> {
-//    private int size;
+package com.realyoung.linklist;
+// 单向循环链表
+public class SingleCircleLinkedList<E> extends AbstractList<E>{
+
     private Node firstNode;
 
-    // private class
-    private static class Node<E> {
+    public class Node<E> {
         E element;
-        // 后继
         Node<E> nextNode;
-        public Node(E element, Node<E> next) {
+        public Node(E element, Node<E> nextNode) {
             this.element = element;
-            this.nextNode = next;
+            this.nextNode = nextNode;
         }
+
     }
-    private static final int ELEMENT_NOT_FOUND = -1;
 
     @Override
     public void clear() {
         size = 0;
         firstNode = null;
     }
-
 
     @Override
     public E get(int index) {
@@ -34,61 +31,74 @@ public class LinkedList<E> extends AbstractList<E> {
         E old = node.element;
         node.element = element;
         return old;
+    }
 
+    @Override
+    public void add(E element) {
+        add(size, element);
     }
 
     @Override
     public void add(int index, E element) {
-
+        rangeCheckForAdd(index);
         if (index == 0) {
-            // first 节点会变成第二个节点
-            firstNode = new Node<E>(element, firstNode);
+            Node<E> newFirst = new Node<E>(element, firstNode);
+
+            // 取出最后一个节点指向第一个节点
+            Node<E> last = (size == 0) ? newFirst : node(size - 1);
+            last.nextNode = newFirst;
+            firstNode = newFirst;
+
         } else {
             Node<E> prev = node(index - 1);
-            // 添加节点
-            prev.nextNode = new Node<E>(element, prev.nextNode);
+            Node<E> node = new Node<E>(element, prev.nextNode);
+            prev.nextNode = node;
         }
         size ++;
     }
 
     @Override
     public E remove(int index) {
-
+        rangeCheck(index);
         Node<E> node = firstNode;
         if (index == 0) {
-            firstNode = firstNode.nextNode;
+            if (size == 1) {
+                firstNode = null;
+            } else {
+                Node<E> lastNode = node(size - 1);
+                firstNode = firstNode.nextNode;
+                lastNode.nextNode = firstNode;
+            }
         } else {
-            // 拿到前面的节点
             Node<E> prev = node(index - 1);
             node = prev.nextNode;
             prev.nextNode = prev.nextNode.nextNode;
         }
         size --;
-
         return node.element;
     }
 
     @Override
     public int indexOf(E element) {
+
         Node<E> node = firstNode;
-        // 空值处理
+
         if (element == null) {
             for (int i = 0; i < size; i++) {
-                if (node(i).element == null) return i;
+                if (element == node.element) return i;
                 node = node.nextNode;
             }
         } else {
-            for (int i = 0; i < size; i++) {
-                if (element.equals(node(i).element)) {
-                    return i;
-                }
+            for (int i = 0; i< size; i++) {
+                if (element.equals(node.element)) return i;
                 node = node.nextNode;
             }
         }
         return ELEMENT_NOT_FOUND;
     }
 
-    // 获取 index 位置对应的节点对象
+
+
     private Node<E> node(int index) {
         rangeCheck(index);
         Node<E> node = firstNode;
@@ -96,8 +106,8 @@ public class LinkedList<E> extends AbstractList<E> {
             node = node.nextNode;
         }
         return node;
-    }
 
+    }
 
     @Override
     public String toString() {

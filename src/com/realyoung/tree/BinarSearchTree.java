@@ -1,4 +1,4 @@
-package com.realyoungtree;
+package com.realyoung.tree;
 
 // 二叉搜索树
 

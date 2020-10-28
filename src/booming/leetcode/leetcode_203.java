@@ -3,8 +3,6 @@ package booming.leetcode;
 // 203. Remove Linked List Elements
 // https://leetcode.com/problems/remove-linked-list-elements/
 
-import com.realyoung.List;
-
 public class leetcode_203 {
     public ListNode removeElements(ListNode head, int val) {
         // 迭代
