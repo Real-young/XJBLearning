@@ -133,7 +133,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         return ((Comparable<E>)e1).compareTo(e2);
     }
 
-    // 前序遍历
+    // 前序遍历  根结点 左子树 右子树
     public void preorderTraversal() {
         preorderTraversal(root);
     }
@@ -142,6 +142,28 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         System.out.println(node.element);
         preorderTraversal(node.left);
         preorderTraversal(node.right);
+    }
+
+    // 中序遍历 左子树 根结点 右子树  二叉搜索树遍历出来的结果是升序或者降序
+    public void inorderTraversal(){
+        inorderTraversal(root);
+    }
+    private void inorderTraversal(Node<E> node){
+        if (node == null) return;
+        inorderTraversal(node.left);
+        System.out.println(node.element);
+        inorderTraversal(node.right);
+    }
+
+    // 后序遍历 左子树 右子树 根结点
+    public void postorderTraversal() {
+        postorderTraversal(root);
+    }
+    private void postorderTraversal(Node<E> node) {
+        if (node == null) return;
+        postorderTraversal(node.left);
+        postorderTraversal(node.right);
+        System.out.println(node.element);
     }
 
 }
