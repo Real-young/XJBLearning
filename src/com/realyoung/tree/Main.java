@@ -28,8 +28,11 @@ public class Main {
 
 //        bst.inorderTraversal();
 
-        bst.postorderTraversal();
+//        bst.postorderTraversal();
+
+        bst.levelOrderTraversal();
     }
+
 
 
 

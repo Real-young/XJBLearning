@@ -5,6 +5,8 @@ package com.realyoung.tree;
 import com.realyoung.printer.BinaryTreeInfo;
 
 import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class BinarySearchTree<E> implements BinaryTreeInfo {
 
@@ -164,6 +166,26 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         postorderTraversal(node.left);
         postorderTraversal(node.right);
         System.out.println(node.element);
+    }
+
+    // 层序遍历
+    public void levelOrderTraversal() {
+        if (root == null) return;
+
+        Queue<Node<E>> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()) {
+            Node<E> node = queue.poll();
+            System.out.println(node.element);
+            if (node.left != null) {
+                queue.offer(node.left);
+            }
+
+            if (node.right != null) {
+                queue.offer(node.right);
+            }
+        }
     }
 
 }
