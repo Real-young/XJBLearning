@@ -24,6 +24,7 @@ public class Main {
 
         BinaryTrees.println(bst);
 
+        bst.preorderTraversal();
 
     }
 

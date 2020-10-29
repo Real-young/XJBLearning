@@ -133,8 +133,15 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         return ((Comparable<E>)e1).compareTo(e2);
     }
 
-
-
+    // 前序遍历
+    public void preorderTraversal() {
+        preorderTraversal(root);
+    }
+     private void preorderTraversal(Node<E> node) {
+        if (node == null) return;
+        System.out.println(node.element);
+        preorderTraversal(node.left);
+        preorderTraversal(node.right);
     }
 
 }
