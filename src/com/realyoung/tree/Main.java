@@ -1,7 +1,7 @@
 package com.realyoung.tree;
 
 import com.realyoung.printer.BinaryTrees;
-//import com.realyoung.BinarySearchTree.Visitor;
+import com.realyoung.tree.BinarySearchTree.Visitor;
 //import com.realyoung.file.Files;
 import com.realyoung.printer.BinaryTreeInfo;
 public class Main {
@@ -24,13 +24,20 @@ public class Main {
 
         BinaryTrees.println(bst);
 
-//        bst.preorderTraversal();
+        bst.preorderTraversal(new Visitor<Integer>() {
+
+            @Override
+            public boolean visit(Integer element) {
+                System.out.print("_" + element + "_ ");
+                return false;
+            }
+        });
 
 //        bst.inorderTraversal();
 
 //        bst.postorderTraversal();
 
-        bst.levelOrderTraversal();
+//        bst.levelOrderTraversal();
     }
 
 

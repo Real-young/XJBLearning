@@ -104,18 +104,6 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         return ((Node<E>)node).element;
     }
 
-    private static class Node<E> {
-        E element;
-        Node<E> left;
-        Node<E> right;
-        Node<E> parent;
-        public Node(E element, Node<E> parent) {
-            this.element = element;
-            this.parent = parent;
-        }
-    }
-
-
     /*
      *  @return 返回值等于0，代表 e1 e2 相等
      *               大于0， e1 > e2
@@ -135,57 +123,125 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         return ((Comparable<E>)e1).compareTo(e2);
     }
 
-    // 前序遍历  根结点 左子树 右子树
-    public void preorderTraversal() {
-        preorderTraversal(root);
-    }
-     private void preorderTraversal(Node<E> node) {
-        if (node == null) return;
-        System.out.println(node.element);
-        preorderTraversal(node.left);
-        preorderTraversal(node.right);
-    }
-
-    // 中序遍历 左子树 根结点 右子树  二叉搜索树遍历出来的结果是升序或者降序
-    public void inorderTraversal(){
-        inorderTraversal(root);
-    }
-    private void inorderTraversal(Node<E> node){
-        if (node == null) return;
-        inorderTraversal(node.left);
-        System.out.println(node.element);
-        inorderTraversal(node.right);
-    }
-
-    // 后序遍历 左子树 右子树 根结点
-    public void postorderTraversal() {
-        postorderTraversal(root);
-    }
-    private void postorderTraversal(Node<E> node) {
-        if (node == null) return;
-        postorderTraversal(node.left);
-        postorderTraversal(node.right);
-        System.out.println(node.element);
-    }
-
-    // 层序遍历
-    public void levelOrderTraversal() {
-        if (root == null) return;
-
-        Queue<Node<E>> queue = new LinkedList<>();
-        queue.offer(root);
-
-        while (!queue.isEmpty()) {
-            Node<E> node = queue.poll();
-            System.out.println(node.element);
-            if (node.left != null) {
-                queue.offer(node.left);
-            }
-
-            if (node.right != null) {
-                queue.offer(node.right);
-            }
+    private static class Node<E> {
+        E element;
+        Node<E> left;
+        Node<E> right;
+        Node<E> parent;
+        public Node(E element, Node<E> parent) {
+            this.element = element;
+            this.parent = parent;
         }
     }
+
+    public static abstract class Visitor<E> {
+        boolean stop;
+        /**
+         * @return 如果返回true，就代表停止遍历
+         */
+        public abstract boolean visit(E element);
+    }
+
+
+//    // 前序遍历  根结点 左子树 右子树
+//    public void preorderTraversal() {
+//        preorderTraversal(root);
+//    }
+//     private void preorderTraversal(Node<E> node) {
+//        if (node == null) return;
+//        System.out.println(node.element);
+//        preorderTraversal(node.left);
+//        preorderTraversal(node.right);
+//    }
+//
+//    // 中序遍历 左子树 根结点 右子树  二叉搜索树遍历出来的结果是升序或者降序
+//    public void inorderTraversal(){
+//        inorderTraversal(root);
+//    }
+//    private void inorderTraversal(Node<E> node){
+//        if (node == null) return;
+//        inorderTraversal(node.left);
+//        System.out.println(node.element);
+//        inorderTraversal(node.right);
+//    }
+//
+//    // 后序遍历 左子树 右子树 根结点
+//    public void postorderTraversal() {
+//        postorderTraversal(root);
+//    }
+//    private void postorderTraversal(Node<E> node) {
+//        if (node == null) return;
+//        postorderTraversal(node.left);
+//        postorderTraversal(node.right);
+//        System.out.println(node.element);
+//    }
+//
+//    // 层序遍历
+//    public void levelOrderTraversal() {
+//        if (root == null) return;
+//
+//        Queue<Node<E>> queue = new LinkedList<>();
+//        queue.offer(root);
+//
+//        while (!queue.isEmpty()) {
+//            Node<E> node = queue.poll();
+//            System.out.println(node.element);
+//            if (node.left != null) {
+//                queue.offer(node.left);
+//            }
+//
+//            if (node.right != null) {
+//                queue.offer(node.right);
+//            }
+//        }
+//    }
+
+    // 2020.10.30 用 Visitor 来控制遍历到二叉树中的哪一个
+
+    // 前序
+    public void preorderTraversal(Visitor<E> visitor) {
+        if (visitor == null) return;
+        preorderTraversal(root, visitor);
+    }
+    private void preorderTraversal(Node<E> node, Visitor<E> visitor) {
+        if (node == null || visitor.stop) return;
+
+        visitor.stop = visitor.visit(node.element);
+        preorderTraversal(node.left, visitor);
+        preorderTraversal(node.right, visitor);
+    }
+
+    // 中序
+    public void inorderTraversal(Visitor<E> visitor) {
+        if (visitor == null) return;
+        inorderTraversal(root, visitor);
+
+    }
+    private void inorderTraversal(Node<E> node, Visitor<E> visitor) {
+        if (node == null || visitor.stop) return;
+
+        inorderTraversal(node.left, visitor);
+        if (visitor.stop) return;
+        visitor.stop = visitor.visit(node.element);
+        inorderTraversal(node.right, visitor);
+    }
+
+    // 后序
+    public void postorder(Visitor<E> visitor) {
+        if (visitor == null) return;
+
+    }
+    private void postorder(Node<E> node, Visitor<E> visitor) {
+        if (node == null || visitor.stop) return;
+
+        postorder(node.left, visitor);
+        postorder(node.right, visitor);
+        if (visitor.stop) return;
+        visitor.stop = visitor.visit(node.element);
+    }
+
+
+
+
 
 }
