@@ -240,8 +240,57 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         visitor.stop = visitor.visit(node.element);
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        toString(root, sb, "");
+        return sb.toString();
 
+    }
 
+    private void toString(Node<E> node, StringBuilder sb, String prefix) {
+        if (node == null) return;
 
+        toString(node.left, sb, prefix + "L--");
+        sb.append(prefix).append(node.element).append("\n");
+        toString(node.right, sb, prefix + "R--");
+    }
 
+    // 高度
+    public int height() {
+        return height2(root);
+    }
+
+    private int height(Node<E> node) {
+        if (node == null) return 0;
+        return 1 + Math.max(height(node.left), height(node.right));
+    }
+
+    private int height2(Node<E> node) {
+        if (node == null) return 0;
+
+        int height = 0;
+        int levelSize = 1;
+        Queue<Node<E>> queue = new LinkedList<>();
+        queue.offer(node);
+
+        while (!queue.isEmpty()) {
+            Node<E> queueNode = queue.poll();
+            levelSize--;
+            if (queueNode.left != null) {
+                queue.offer(queueNode.left);
+            }
+
+            if (queueNode.right != null) {
+                queue.offer(queueNode.right);
+            }
+
+            if (levelSize == 0) {
+                levelSize = queue.size();
+                height++;
+            }
+        }
+
+        return height;
+    }
 }

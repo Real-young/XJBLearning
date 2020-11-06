@@ -23,21 +23,24 @@ public class Main {
         }
 
         BinaryTrees.println(bst);
+//        System.out.println(bst);
+        System.out.println(bst.height());
 
-        bst.preorderTraversal(new Visitor<Integer>() {
-
-            @Override
-            public boolean visit(Integer element) {
-                System.out.print("_" + element + "_ ");
-                return false;
-            }
-        });
+//        bst.preorderTraversal(new Visitor<Integer>() {
+//
+//            @Override
+//            public boolean visit(Integer element) {
+//                System.out.print("_" + element + "_ ");
+//                return false;
+//            }
+//        });
 
 //        bst.inorderTraversal();
 
 //        bst.postorderTraversal();
 
 //        bst.levelOrderTraversal();
+
     }
 
 
