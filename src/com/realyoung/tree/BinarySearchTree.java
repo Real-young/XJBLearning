@@ -132,6 +132,16 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
             this.element = element;
             this.parent = parent;
         }
+
+        // 判断叶子节点
+        public boolean isLeaf() {
+            return left == null && right == null;
+        }
+
+        // 判断拥有两个子节点
+        public boolean hasTowChileren() {
+            return left != null && right != null;
+        }
     }
 
     public static abstract class Visitor<E> {
@@ -292,5 +302,31 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         }
 
         return height;
+    }
+
+    public boolean isComplete() {
+
+        if (root == null) return false;
+        Queue<Node<E>> queue = new LinkedList<>();
+
+        queue.offer(root);
+        boolean leaf = false; // 标记是否叶子节点
+        while (!queue.isEmpty()) {
+            Node<E> node = queue.poll();
+
+            if (leaf && !node.isLeaf()) {  // 前面的已经是叶子节点 但 后面的不是叶子节点 返回 false
+                return false;
+            }
+
+            if (node.hasTowChileren()) {  // 有两个叶子节点
+                queue.offer(node.left);
+                queue.offer(node.right);
+            } else if (node.left == null && node.right != null) {
+                return false;
+            } else {   // 后面遍历的节点都必须是叶子节点
+                leaf = true;
+            }
+        }
+        return true;
     }
 }

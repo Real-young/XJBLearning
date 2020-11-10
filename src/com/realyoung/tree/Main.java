@@ -14,7 +14,8 @@ public class Main {
 
     static void test1() {
         Integer data[] = new Integer[] {
-                7, 4, 9, 2, 5, 8, 11, 3, 12, 1
+//                7, 4, 9, 2, 5, 8, 11, 3, 12, 1
+                7, 4, 9, 2, 5
         };
 
         BinarySearchTree<Integer> bst = new BinarySearchTree<>();
@@ -25,6 +26,7 @@ public class Main {
         BinaryTrees.println(bst);
 //        System.out.println(bst);
         System.out.println(bst.height());
+        System.out.println(bst.isComplete());
 
 //        bst.preorderTraversal(new Visitor<Integer>() {
 //
