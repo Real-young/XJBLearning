@@ -344,7 +344,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         while (!queue.isEmpty()) {
             Node<E> node = queue.poll();
             if (leaf && !node.isLeaf()) return false;
-            
+
             if (node.left != null) {
                 queue.offer(node.left);
             } else if (node.right != null) {
