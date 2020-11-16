@@ -276,6 +276,8 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         return 1 + Math.max(height(node.left), height(node.right));
     }
 
+
+    // 判断高度
     private int height2(Node<E> node) {
         if (node == null) return 0;
 
@@ -333,6 +335,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 //        return true;
 //    }
 
+    // 是否完全二叉树
     public boolean isComplete() {
 
         if (root == null) return false;
@@ -360,5 +363,49 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 
         return false;
     }
+
+    // 前驱节点
+    public Node<E> predecessor(Node<E> node) {
+        if (node == null) return null;
+        Node<E> p = node.left;
+
+        if (p != null) {
+            while (p.right != null) {
+                p = p.right;
+            }
+            return p;
+        }
+
+        // 从父节点 祖父节点找前驱
+        while (node.parent != null && node == node.parent.left) {
+            node = node.parent;
+        }
+
+        // node.parent == null
+        // node == node.parent.right
+        return node.parent;
+    }
+
+    // 后驱节点
+    public Node<E> successsor(Node<E> node) {
+        if (node == null) return null;
+        Node<E> s = node.right;
+
+        if (s != null) {
+            while (s.left != null) {
+                s = s.left;
+            }
+            return s;
+        }
+
+        // 从父节点
+        while (node.parent != null && node == node.parent.right) {
+            node = node.parent;
+        }
+
+        return node.parent;
+
+    }
+
 
 }
