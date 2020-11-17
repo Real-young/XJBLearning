@@ -398,7 +398,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
             return s;
         }
 
-        // 从父节点
+        // 从父节点 祖父节点找后驱
         while (node.parent != null && node == node.parent.right) {
             node = node.parent;
         }
