@@ -32,7 +32,8 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
     }
 
     public void clear() {
-
+        root = null;
+        size = 0;
     }
 
     public void add(E element) {
@@ -71,11 +72,65 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
     }
 
     public void remove(E element) {
-
+        remove(node(element));
     }
 
     public boolean contains(E element) {
         return false;
+    }
+
+    private void remove (Node<E> node) {
+        if (node == null) return;
+        size--;
+        // 度为2
+        if (node.hasTowChileren()) {
+            Node<E> s = successor(node);
+            // 后继节点覆盖 度为2 的节点
+            node.element = s.element;
+            // 删除后继节点
+            node = s;
+        }
+
+        // 删除 node  （此时 node 的度必然是 1 或者 0）
+        Node<E> replacement = node.left != null ? node.left : node.right;
+        // 不为空就是 度为 1
+        if (replacement != null) {
+            replacement.parent = node.parent;
+
+            if (node.parent == null) {
+                root = replacement;
+            } else if (node == node.parent.left) {
+                node.parent.left = replacement;
+            } else if (node == node.parent.right) {
+                node.parent.right = replacement;
+            }
+
+        } else if (node.parent == null) {
+            root = null; // 根节点
+        } else { // node 是叶子节点 不是根节点 度为0
+            if (node == node.parent.left) {
+                node.parent.left = null;
+            } else {
+                node.parent.right =null;
+            }
+        }
+
+    }
+
+    private Node<E> node(E element) {
+        Node<E> node = root;
+        while (node != null) {
+            int cmp = compare(element, node.element);
+            if (cmp == 0) return node;
+
+            if (cmp < 0) {
+                node = node.left;
+            }
+            if (cmp > 0) {
+                node = node.right;
+            }
+        }
+        return node;
     }
 
     private void elementNotNullCheck(E element) {
@@ -387,7 +442,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
     }
 
     // 后驱节点
-    public Node<E> successsor(Node<E> node) {
+    public Node<E> successor(Node<E> node) {
         if (node == null) return null;
         Node<E> s = node.right;
 
