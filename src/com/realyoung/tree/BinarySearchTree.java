@@ -2,10 +2,41 @@ package com.realyoung.tree;
 
 // 二叉搜索树
 
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class BinarySearchTree<E> extends BinaryTree<E>{
+
+    // 比较器
+    private Comparator<E> comparator;
+
+    public BinarySearchTree() {
+        this(null);
+    }
+
+    public BinarySearchTree(Comparator<E> comparator) {
+        this.comparator = comparator;
+    }
+
+    /*
+     *  @return 返回值等于0，代表 e1 e2 相等
+     *               大于0， e1 > e2
+     *               小于0， e1 < e2
+     * */
+    protected int compare(E e1, E e2) {
+
+        // 用比较器做比较 可选择对象的值等
+        if (comparator != null) {
+            return comparator.compare(e1, e2);
+        }
+        /*
+         * 强转
+         * 如果没有比较器 则遵循接口
+         * 强制对象实现 compareTo
+         * */
+        return ((Comparable<E>)e1).compareTo(e2);
+    }
 
     public void add(E element) {
         elementNotNullCheck(element);
@@ -111,13 +142,7 @@ public class BinarySearchTree<E> extends BinaryTree<E>{
     }
 
 
-    public static abstract class Visitor<E> {
-        boolean stop;
-        /**
-         * @return 如果返回true，就代表停止遍历
-         */
-        public abstract boolean visit(E element);
-    }
+
 
 
 //    // 前序遍历  根结点 左子树 右子树
@@ -174,45 +199,7 @@ public class BinarySearchTree<E> extends BinaryTree<E>{
 //    }
 
 
-    // 高度
-    public int height() {
-        return height2(root);
-    }
 
-    private int height(Node<E> node) {
-        if (node == null) return 0;
-        return 1 + Math.max(height(node.left), height(node.right));
-    }
-
-
-    // 判断高度
-    private int height2(Node<E> node) {
-        if (node == null) return 0;
-
-        int height = 0;
-        int levelSize = 1;
-        Queue<Node<E>> queue = new LinkedList<>();
-        queue.offer(node);
-
-        while (!queue.isEmpty()) {
-            Node<E> queueNode = queue.poll();
-            levelSize--;
-            if (queueNode.left != null) {
-                queue.offer(queueNode.left);
-            }
-
-            if (queueNode.right != null) {
-                queue.offer(queueNode.right);
-            }
-
-            if (levelSize == 0) {
-                levelSize = queue.size();
-                height++;
-            }
-        }
-
-        return height;
-    }
 
 //    public boolean isComplete() {
 //
@@ -242,78 +229,5 @@ public class BinarySearchTree<E> extends BinaryTree<E>{
 //        }
 //        return true;
 //    }
-
-    // 是否完全二叉树
-    public boolean isComplete() {
-
-        if (root == null) return false;
-
-        Queue<Node<E>> queue = new LinkedList<>();
-        queue.offer(root);
-
-        boolean leaf = false;
-        while (!queue.isEmpty()) {
-            Node<E> node = queue.poll();
-            if (leaf && !node.isLeaf()) return false;
-
-            if (node.left != null) {
-                queue.offer(node.left);
-            } else if (node.right != null) {
-                return false;
-            }
-
-            if (node.right != null) {
-                queue.offer(node.right);
-            } else {
-                leaf = true;
-            }
-        }
-
-        return false;
-    }
-
-    // 前驱节点
-    public Node<E> predecessor(Node<E> node) {
-        if (node == null) return null;
-        Node<E> p = node.left;
-
-        if (p != null) {
-            while (p.right != null) {
-                p = p.right;
-            }
-            return p;
-        }
-
-        // 从父节点 祖父节点找前驱
-        while (node.parent != null && node == node.parent.left) {
-            node = node.parent;
-        }
-
-        // node.parent == null
-        // node == node.parent.right
-        return node.parent;
-    }
-
-    // 后驱节点
-    public Node<E> successor(Node<E> node) {
-        if (node == null) return null;
-        Node<E> s = node.right;
-
-        if (s != null) {
-            while (s.left != null) {
-                s = s.left;
-            }
-            return s;
-        }
-
-        // 从父节点 祖父节点找后驱
-        while (node.parent != null && node == node.parent.right) {
-            node = node.parent;
-        }
-
-        return node.parent;
-
-    }
-
 
 }

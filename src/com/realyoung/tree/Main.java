@@ -3,7 +3,7 @@ package com.realyoung.tree;
 import booming.leetcode.TreeNode;
 import booming.leetcode.leetcode_102;
 import com.realyoung.printer.BinaryTrees;
-import com.realyoung.tree.BinarySearchTree.Visitor;
+import com.realyoung.tree.BinaryTree.Visitor;
 //import com.realyoung.file.Files;
 import com.realyoung.printer.BinaryTreeInfo;
 public class Main {
