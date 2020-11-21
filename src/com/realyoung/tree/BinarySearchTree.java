@@ -9,7 +9,7 @@ import java.util.Queue;
 public class BinarySearchTree<E> extends BinaryTree<E>{
 
     // 比较器
-    private Comparator<E> comparator;
+    protected Comparator<E> comparator;
 
     public BinarySearchTree() {
         this(null);
@@ -43,6 +43,8 @@ public class BinarySearchTree<E> extends BinaryTree<E>{
         if (root == null) {
             root = new Node<>(element, null);
             size ++;
+
+            afterAdd(root);
             return;
         }
 
@@ -71,7 +73,12 @@ public class BinarySearchTree<E> extends BinaryTree<E>{
             parent.left = newNode;
         }
         size ++;
+
+        afterAdd(newNode);
     }
+
+    // 添加 Node 之后的调整
+    protected void afterAdd(Node<E> node) { }
 
     public void remove(E element) {
         remove(node(element));
