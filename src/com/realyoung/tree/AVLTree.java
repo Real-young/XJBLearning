@@ -28,6 +28,12 @@ public class AVLTree<E> extends BinarySearchTree<E> {
 
             return leftHeight - rightHeight;
         }
+
+        public void updateHeight() {
+            int leftHeight = left == null ? 0 : ((AVLNode<E>)left).height;
+            int rightHeight = right == null ? 0 : ((AVLNode<E>)right).height;
+            height = 1 + Math.max(leftHeight, rightHeight);
+        }
     }
 
     @Override
@@ -35,11 +41,16 @@ public class AVLTree<E> extends BinarySearchTree<E> {
 
         while ((node = node.parent) != null) {
             if (isBalanced(node)) {   // 这计算 小于等于1 就是平衡
-
+                // 更新高度
+                updateHeight(node);
             } else { // 不平衡则旋转
 
             }
         }
 
+    }
+
+    private void updateHeight(Node<E> node) {
+        ((AVLNode<E>)node).updateHeight();
     }
 }

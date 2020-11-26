@@ -63,6 +63,14 @@ public class BinaryTree<E> implements BinaryTreeInfo {
         public boolean hasTowChileren() {
             return left != null && right != null;
         }
+
+        public boolean isLeftChild() {
+            return parent != null && this == parent.left;
+        }
+
+        public boolean isRightChild() {
+            return parent != null && this == parent.right;
+        }
     }
 
     public static abstract class Visitor<E> {
