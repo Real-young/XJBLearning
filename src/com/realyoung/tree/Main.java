@@ -1,16 +1,13 @@
 package com.realyoung.tree;
 
-import booming.leetcode.TreeNode;
-import booming.leetcode.leetcode_102;
+
 import com.realyoung.printer.BinaryTrees;
-import com.realyoung.tree.BinaryTree.Visitor;
-//import com.realyoung.file.Files;
-import com.realyoung.printer.BinaryTreeInfo;
+
 public class Main {
     public static void main(String[] args) {
         System.out.println("helloworld");
 
-        test2();
+        test3();
     }
 
     static void test1() {
@@ -62,6 +59,21 @@ public class Main {
         BinaryTrees.println(bst);
     }
 
+    static void test3() {
+        Integer data[] = new Integer[] {
+                45, 79, 9, 100, 13, 31, 77, 91, 22, 27, 95, 98, 7, 84, 57, 49, 55, 78, 16, 38
+        };
+
+        AVLTree<Integer> avl = new AVLTree<>();
+        for (int i = 0; i < data.length; i++) {
+            avl.add(data[i]);
+        }
+
+        BinaryTrees.println(avl);
+
+//        avl.remove(7);
+//        BinaryTrees.println(avl);
+    }
 
 
 }

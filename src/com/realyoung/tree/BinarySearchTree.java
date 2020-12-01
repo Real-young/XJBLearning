@@ -41,7 +41,7 @@ public class BinarySearchTree<E> extends BinaryTree<E>{
     public void add(E element) {
         elementNotNullCheck(element);
         if (root == null) {
-            root = new Node<>(element, null);
+            root = createNode(element, null);
             size ++;
 
             afterAdd(root);
@@ -66,7 +66,7 @@ public class BinarySearchTree<E> extends BinaryTree<E>{
         }
 
         // 查看添加到哪个位置
-        Node<E> newNode = new Node<>(element, parent);
+        Node<E> newNode = createNode(element, parent);
         if (cmp > 0) {
             parent.right = newNode;
         } else {
