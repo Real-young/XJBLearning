@@ -61,8 +61,10 @@ public class Main {
 
     static void test3() {
         Integer data[] = new Integer[] {
-                45, 79, 9, 100, 13, 31, 77, 91, 22, 27, 95, 98, 7, 84, 57, 49, 55, 78, 16, 38
+//                45, 79, 9, 100, 13, 31, 77, 91, 22, 27, 95, 98, 7, 84, 57, 49, 55, 78, 16, 38
+                85,19,69,3,7,99,95
         };
+
 
         AVLTree<Integer> avl = new AVLTree<>();
         for (int i = 0; i < data.length; i++) {
@@ -71,8 +73,14 @@ public class Main {
 
         BinaryTrees.println(avl);
 
-//        avl.remove(7);
-//        BinaryTrees.println(avl);
+        avl.remove(99);
+        BinaryTrees.println(avl);
+
+        avl.remove(85);
+        BinaryTrees.println(avl);
+
+        avl.remove(95);
+        BinaryTrees.println(avl);
     }
 
 

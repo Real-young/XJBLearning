@@ -29,6 +29,19 @@ public class AVLTree<E> extends BinarySearchTree<E> {
     }
 
     @Override
+    protected void afterRemove(Node<E> node) {
+        while ((node = node.parent) != null) {
+            if (isBalanced(node)) {   // 这计算 小于等于1 就是平衡
+                // 更新高度
+                updateHeight(node);
+            } else { // 不平衡则旋转
+                // 恢复平衡
+                rebalance(node);
+            }
+        }
+    }
+
+    @Override
     protected Node<E> createNode(E element, Node<E> parent) {
         return new AVLNode<>(element, parent);
     }
