@@ -43,7 +43,29 @@ public class RBTree<E> extends BinarySearchTree<E> {
 
     @Override
     protected void afterAdd(Node<E> node) {
-        super.afterAdd(node);
+        Node<E> parent = node.parent;
+
+        // 添加的是根节点
+        if (parent == null) {
+            black(node);
+            return;
+        }
+
+        // 如果父节点是黑色，直接返回
+        if (isBlack(parent)) return;
+
+        // 叔父节点
+        Node<E> uncle = parent.sibling();
+        // 祖父节点
+        Node<E> grand = parent.parent;
+        // 如果叔父节点是红色
+        if (isRed(uncle)) {
+            // 染色
+            black(parent);
+            black(uncle);
+            // 把祖父节点当作新添加的节点
+            afterAdd(red(grand));
+        }
     }
 
     @Override
